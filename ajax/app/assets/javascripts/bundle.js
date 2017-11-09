@@ -90,11 +90,11 @@ $(() => {
 
 const APIUtil = __webpack_require__(2);
 class FollowToggle {
-  constructor($button) {
+  constructor($button, options) {
     // const $button = $('.follow_toggle');
-    this.userId = $button.attr("data-user-id");
+    this.userId = ($button.attr("data-user-id") || options.userId);
     //followState false? means following that user
-    this.followState = $button.attr("data-initial-follow-state");
+    this.followState = ($button.attr("data-initial-follow-state") || options.followState);
     this.$button = $button;
     this.render();
 
@@ -169,6 +169,7 @@ const APIUtil = {
       data: {query: queryVal},
       success: (searchResults) => {
         // console.log(searchResults);
+
         return success(searchResults);
       },
       error: (error) => {
@@ -187,6 +188,7 @@ module.exports = APIUtil;
 /***/ (function(module, exports, __webpack_require__) {
 
 const apiUtil = __webpack_require__(2);
+const followToggle = __webpack_require__(1);
 class UsersSearch {
   constructor ($el) {
     this.$el = $el;
@@ -212,10 +214,22 @@ class UsersSearch {
     usersArr.forEach((user) => {
       let listitem = $('<li></li>');
       let anch = $('<a></a>');
+      let button = $('<button></button>');
+      button.addClass("follow-toggle");
+      // button.attr("data-initial-follow-state", "unfollowed");
+      // button.attr("data-user-id", user.id);
+      // button.attr("type", "button");
+      // button.attr("name", "button");
+
+      let options = {
+        followState: user.followed ? "followed" : "unfollowed",
+        userId: user.id
+      };
+      new followToggle(button, options);
       anch.attr("href", `/users/${user.id}`);
       anch.text(user.username);
       listitem.append(anch);
-
+      listitem.append(button);
       ul.append(listitem);
     });
   }

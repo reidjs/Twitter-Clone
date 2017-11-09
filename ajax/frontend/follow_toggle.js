@@ -1,10 +1,10 @@
 const APIUtil = require('./api_util.js');
 class FollowToggle {
-  constructor($button) {
+  constructor($button, options) {
     // const $button = $('.follow_toggle');
-    this.userId = $button.attr("data-user-id");
+    this.userId = ($button.attr("data-user-id") || options.userId);
     //followState false? means following that user
-    this.followState = $button.attr("data-initial-follow-state");
+    this.followState = ($button.attr("data-initial-follow-state") || options.followState);
     this.$button = $button;
     this.render();
 

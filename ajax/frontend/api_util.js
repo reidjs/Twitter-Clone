@@ -32,6 +32,7 @@ const APIUtil = {
       data: {query: queryVal},
       success: (searchResults) => {
         // console.log(searchResults);
+
         return success(searchResults);
       },
       error: (error) => {
