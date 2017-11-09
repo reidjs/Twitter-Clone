@@ -9,10 +9,12 @@
   </head>
 
   <body>
-    <ul>
-      <li><%= link_to "Feed", feed_url %></li>
-      <li><%= link_to "User Search", search_users_url %></li>
-    </ul>
+    <header>
+      <ul>
+        <li><%= link_to "Feed", feed_url %></li>
+        <li><%= link_to "User Search", search_users_url %></li>
+      </ul>
+    </header>
 
     <% if current_user %>
       <form action="/session" method="POST">
@@ -25,7 +27,7 @@
         <input type="submit" value="Logout!">
       </form>
     <% end %>
-    
+
     <%= yield %>
   </body>
 </html>

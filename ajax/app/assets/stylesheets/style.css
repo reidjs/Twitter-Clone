@@ -2,3 +2,33 @@ body {
   font-family: "Helvetica", sans-serif;
   /*font: Helvetica;*/
 }
+header ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav.users-search > ul{
+  list-style: none;
+  /*padding: 5px;*/
+  /*background: green;*/
+}
+
+nav.users-search > ul > li > a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: green;
+}
+nav.users-search > ul > li > a:hover {
+  color: blue;
+}
+.follow-toggle {
+  padding: 5px 10px;
+
+  /*background: ;*/
+}
+
+#searchbox  {
+  background: black;
+  color: white;
+}
