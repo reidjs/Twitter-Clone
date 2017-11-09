@@ -207,8 +207,16 @@ class UsersSearch {
   }
 
   renderResults(usersArr) {
-    usersArr.forEach((el) => {
-      console.log(el);
+    const ul = $('ul.users');
+    ul.empty();
+    usersArr.forEach((user) => {
+      let listitem = $('<li></li>');
+      let anch = $('<a></a>');
+      anch.attr("href", `/users/${user.id}`);
+      anch.text(user.username);
+      listitem.append(anch);
+
+      ul.append(listitem);
     });
   }
 }
