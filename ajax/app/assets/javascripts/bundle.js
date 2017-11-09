@@ -68,11 +68,19 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 const followToggle = __webpack_require__(1);
+const userSearch = __webpack_require__(3);
 $(() => {
+
   $('button.follow-toggle').each(function(i, el) {
     // debugger
     const x = new followToggle($(el));
   });
+
+ $('nav.users-search').each(function(i, el) {
+
+   const y = new userSearch($(el));
+ });
+
 });
 
 
@@ -151,10 +159,61 @@ const APIUtil = {
         // this.render();
       }
     });
+  },
+  searchUsers: (queryVal, success) => {
+    return $.ajax({
+      url: '/users/search',
+      method: "GET",
+      dataType: "JSON",
+      // data: `query: ${queryVal}`,
+      data: {query: queryVal},
+      success: (searchResults) => {
+        // console.log(searchResults);
+        return success(searchResults);
+      },
+      error: (error) => {
+
+        console.log(error);
+      }
+    });
   }
 };
 
 module.exports = APIUtil;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const apiUtil = __webpack_require__(2);
+class UsersSearch {
+  constructor ($el) {
+    this.$el = $el;
+    this.$input = $($el.find('input'));
+    this.$ul = $($el.find('ul'));
+    // this.query = "";
+    this.$input.on("keypress", (event) => {
+      this.handleInput(event);
+    });
+  }
+
+  handleInput(event) {
+    // console.log(e.key);
+    // this.query += event.key;
+    // apiUtil.searchUsers(this.query, this.renderResults);
+    // debugger
+    apiUtil.searchUsers(this.$input.val(), this.renderResults);
+  }
+
+  renderResults(usersArr) {
+    usersArr.forEach((el) => {
+      console.log(el);
+    });
+  }
+}
+
+module.exports = UsersSearch;
 
 
 /***/ })

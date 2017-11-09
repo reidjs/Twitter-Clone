@@ -22,6 +22,23 @@ const APIUtil = {
         // this.render();
       }
     });
+  },
+  searchUsers: (queryVal, success) => {
+    return $.ajax({
+      url: '/users/search',
+      method: "GET",
+      dataType: "JSON",
+      // data: `query: ${queryVal}`,
+      data: {query: queryVal},
+      success: (searchResults) => {
+        // console.log(searchResults);
+        return success(searchResults);
+      },
+      error: (error) => {
+
+        console.log(error);
+      }
+    });
   }
 };
 
